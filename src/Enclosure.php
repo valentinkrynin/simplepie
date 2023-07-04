@@ -931,7 +931,7 @@ class Enclosure
             }
         }
 
-        $mime = explode('/', $type, 2);
+        $mime = explode('/', $type ?? "" , 2);
         $mime = $mime[0];
 
         // Process values for 'auto'
