@@ -179,6 +179,12 @@ class Enclosure
     public $width;
 
     /**
+     * @var ?int
+     * @see get_mediagroup()
+     */
+    public $mediagroup;
+
+    /**
      * Constructor, used to input the data
      *
      * For documentation on all the parameters, see the corresponding
@@ -222,7 +228,8 @@ class Enclosure
         ?string $samplingrate = null,
         ?array $thumbnails = null,
         ?string $title = null,
-        ?string $width = null
+        ?string $width = null,
+        ?int $mediagroup = null
     ) {
         $this->bitrate = $bitrate;
         $this->captions = $captions;
@@ -249,6 +256,7 @@ class Enclosure
         $this->title = $title;
         $this->type = $type;
         $this->width = $width;
+        $this->mediagroup = $mediagroup;
 
         if (function_exists('idn_to_ascii')) {
             $parsed = \SimplePie\Misc::parse_url($link);
@@ -796,6 +804,20 @@ class Enclosure
     {
         if ($this->width !== null) {
             return $this->width;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the mediagroup key of the enclosure
+     *
+     * @return int|null
+     */
+    public function get_mediagroup()
+    {
+        if ($this->mediagroup !== null) {
+            return $this->mediagroup;
         }
 
         return null;
